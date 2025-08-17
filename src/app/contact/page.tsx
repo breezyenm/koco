@@ -1,26 +1,39 @@
 import React from 'react';
-import { Navigation } from '@/components/Navigation';
+import { PageFrame } from '@/components/PageFrame';
 import { Button } from '@/components/Button';
 import { LocalTime } from '@/components/LocalTime';
 
 export default function ContactPage() {
+  const subject = 'Quick call request';
+  const body = [
+    'Hello Elizabeth,',
+    '',
+    'I would like to schedule a quick call to discuss my needs.',
+    '',
+    'Thanks,',
+    '[Your Name]',
+  ].join('\n');
+
   return (
-    <div className="min-h-screen bg-[var(--kds-bg-base-dark)] relative overflow-hidden">
-      {/* Navigation */}
-      <Navigation variant="dark" />
-      
-      {/* Section */}
-      <main className="min-h-screen flex items-center justify-center relative">
-        {/* Background overlays for subtle texture */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/45 to-black/60"></div>
-        <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-gray-900 to-black"></div>
+    <PageFrame
+      variant="dark"
+      rootClassName="min-h-screen bg-[var(--kds-bg-base-dark)] relative overflow-hidden"
+      mainClassName="min-h-screen flex items-center justify-center relative"
+      background={(
+        <>
+          {/* Background overlays for subtle texture */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/45 to-black/60"></div>
+          <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-gray-900 to-black"></div>
+        </>
+      )}
+    >
 
         {/* Content */}
         <div className="relative z-10 text-left px-4 md:px-8 max-w-6xl mx-auto w-full">
           <h1 className="text-display-2 text-[var(--kds-text-on-dark)] mb-6">
-            Hello Visitor, it's <LocalTime />
+            Hello Visitor, it&apos;s <LocalTime />
             <br />
-            in Abuja, I'm available
+            in Abuja, I&apos;m available
           </h1>
 
           <p className="text-body-md text-[var(--kds-text-muted-on-dark)] mb-12 max-w-2xl">
@@ -31,7 +44,7 @@ export default function ContactPage() {
           <div className="mb-20">
             <Button variant="link" size="lg" className="text-lg" asChild>
               <a
-                href={`mailto:Lizzyumoren7@gmail.com?subject=${encodeURIComponent('Quick call request')}&body=${encodeURIComponent('Hello Elizabeth,%0D%0A%0D%0AI would like to schedule a quick call to discuss my needs.%0D%0A%0D%0AThanks,%0D%0A[Your Name]')}`}
+                href={`mailto:Lizzyumoren7@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
               >
                 Apply for quick call
               </a>
@@ -65,7 +78,6 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+    </PageFrame>
   );
 }

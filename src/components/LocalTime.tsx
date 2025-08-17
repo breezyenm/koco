@@ -17,7 +17,7 @@ function formatTimeForZone(timeZone: string): string {
 		});
 		// Ensure AM/PM is uppercase (some environments return lowercase)
 		return formatter.format(new Date()).replace(/am|pm/i, (m) => m.toUpperCase());
-	} catch (_) {
+	} catch {
 		// Fallback to browser local time if timezone unsupported
 		const fallback = new Intl.DateTimeFormat(undefined, {
 			hour: '2-digit',

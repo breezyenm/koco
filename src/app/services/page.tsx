@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation } from '@/components/Navigation';
+import { PageFrame } from '@/components/PageFrame';
 
 const serviceItems = [
   {
@@ -35,13 +35,9 @@ const sidebarItems = [
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-[var(--kds-bg-base-light)]">
-      {/* Navigation */}
-      <Navigation variant="light" />
-      
-      <div className="pt-[72px] grid lg:grid-cols-[1fr_300px] min-h-screen">
+    <PageFrame variant="light" rootClassName="bg-[var(--kds-bg-base-light)]" mainClassName="grid lg:grid-cols-[1fr_300px] min-h-screen">
         {/* Main Content */}
-        <main className="bg-[var(--kds-bg-base-light)] px-4 md:px-8 lg:px-16 py-16">
+        <div className="bg-[var(--kds-bg-base-light)] px-4 md:px-8 lg:px-16 py-16">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-body-sm text-[var(--kds-text-muted-on-light)] mb-12">
             <span>HOME PAGE</span>
@@ -128,8 +124,8 @@ export default function ServicesPage() {
               </div>
             </div>
           </div>
-        </main>
-        
+        </div>
+
         {/* Right Sidebar */}
         <aside className="bg-[var(--kds-bg-base-dark)] text-[var(--kds-text-on-dark)] p-8">
           {/* Sidebar Header */}
@@ -178,7 +174,6 @@ export default function ServicesPage() {
             </div>
           </div>
         </aside>
-      </div>
-    </div>
+      </PageFrame>
   );
 }

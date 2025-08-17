@@ -1,17 +1,13 @@
 import React from 'react';
-import { Navigation } from '@/components/Navigation';
+import { PageFrame } from '@/components/PageFrame';
 import { Button } from '@/components/Button';
 import Link from 'next/link';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[var(--kds-bg-base-light)]">
-      {/* Navigation */}
-      <Navigation variant="light" />
-      
+    <PageFrame variant="light" rootClassName="bg-[var(--kds-bg-base-light)]" mainClassName="">
       {/* Hero Section */}
-      <main className="pt-[72px]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-16 items-center min-h-[80vh]">
             {/* Left Column - Content */}
             <div className="space-y-8">
@@ -20,7 +16,7 @@ export default function AboutPage() {
                   ABOUT ME
                 </p>
                 <h1 className="text-h1 text-[var(--kds-text-on-light)] mb-6">
-                  I'm Elizabeth Umoren, <span className="font-normal">IT Business Analyst</span>
+                  I&apos;m Elizabeth Umoren, <span className="font-normal">IT Business Analyst</span>
                 </h1>
                 <p className="text-body-lg text-[var(--kds-text-muted-on-light)] leading-relaxed max-w-lg">
                   I bridge business strategy and technical implementation to deliver data-driven solutions and measurable value. With 4+ years across North America, Canada, and Africa, I lead end-to-end analysis — from discovery and user stories to SDLC execution and UAT.
@@ -120,8 +116,7 @@ export default function AboutPage() {
               <div className="w-6 h-6 text-[var(--kds-text-muted-on-light)]">🐙</div>
             </div>
           </div>
-        </div>
-      </main>
-    </div>
+      </div>
+    </PageFrame>
   );
 }
