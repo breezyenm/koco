@@ -8,16 +8,16 @@ export default function Home() {
       mainClassName="relative z-10 min-h-screen flex items-center"
       background={(
         <>
-          {/* Background Image (replace '/hero.jpg' with your provided asset in `public/`) */}
+          {/* Background Portrait */}
           <div
-            className="absolute inset-0 bg-center bg-cover"
-            style={{ backgroundImage: "url('/hero.jpg')" }}
+            className="absolute inset-0 bg-bottom sm:bg-right md:bg-right-bottom bg-no-repeat bg-contain"
+            style={{ backgroundImage: "url('/koco.png')" }}
             aria-hidden
           />
           {/* Darkening overlay to ensure readable text */}
           <div className="absolute inset-0 bg-black/70" />
-          {/* Accent green rectangle overlay */}
-          <div className="pointer-events-none absolute right-[12%] top-[26%] h-48 w-24 sm:h-56 sm:w-28 md:h-64 md:w-32 bg-[var(--kds-color-accent-green-overlay)] mix-blend-overlay" />
+          {/* Accent green rectangle overlay over the right eye region */}
+          <div className="pointer-events-none absolute right-[16%] top-[22%] h-48 w-24 sm:h-56 sm:w-28 md:h-64 md:w-32 bg-[var(--kds-color-accent-green-overlay)] mix-blend-overlay" />
         </>
       )}
     >
