@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button } from './Button';
 import { cn } from '@/lib/utils';
@@ -44,17 +45,20 @@ const Navigation: React.FC<NavigationProps> = ({ variant = 'dark' }) => {
       'fixed top-0 left-0 right-0 z-50 h-[72px] backdrop-blur-sm nav-shell'
     )}>
       <div className="flex items-center justify-between h-full max-w-7xl mx-auto w-full">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-[18px] h-[18px] text-[var(--kds-color-accent-star)]">
-            ★
-          </div>
-          <span className={cn(
-            'text-body-md font-medium',
-            variant === 'dark' ? 'text-[var(--kds-text-on-dark)]' : 'text-[var(--kds-text-on-light)]'
-          )}>
-            Elizabeth Umoren
-          </span>
+        {/* Brand */}
+        <Link href="/" className="flex items-center gap-2" aria-label="Home">
+          {/* Mobile: icon */}
+          <img
+            src="/k-icon.png"
+            alt="Elizabeth Umoren logo icon"
+            className={cn('block md:hidden h-10 w-auto', variant === 'light' && 'invert')}
+          />
+          {/* Tablet/Desktop: full logo */}
+          <img
+            src="/k-logo.png"
+            alt="Elizabeth Umoren logo"
+            className={cn('hidden md:block h-12 w-auto', variant === 'light' && 'invert')}
+          />
         </Link>
 
         {/* Navigation Links */}
@@ -140,9 +144,12 @@ const Navigation: React.FC<NavigationProps> = ({ variant = 'dark' }) => {
               aria-modal="true"
             >
               <div className={cn('flex items-center justify-between h-[72px] px-4 sm:px-6 border-b backdrop-blur-sm', drawerHeaderTint, borderOnBg)}>
-                <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-                  <div className="w-[18px] h-[18px] text-[var(--kds-color-accent-star)]">★</div>
-                  <span className={cn('text-body-md font-medium', textOnBg)}>Elizabeth Umoren</span>
+                <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)} aria-label="Home">
+                  <img
+                    src="/k-icon.png"
+                    alt="Elizabeth Umoren logo icon"
+                    className={cn('h-10 w-auto', variant === 'light' && 'invert')}
+                  />
                 </Link>
                 <button
                   className={cn('p-2 rounded-full border', borderOnBg)}
