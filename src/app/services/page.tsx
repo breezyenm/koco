@@ -1,179 +1,178 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import { PageFrame } from '@/components/PageFrame';
+import { Button } from '@/components/Button';
+import Link from 'next/link';
 
-const serviceItems = [
-  {
-    title: "UPDATE SUBPAGES",
-    category: "RESEARCH",
-    place: "TOKYO",
-    hasIcon: false
-  },
-  {
-    title: "NEW FEATURES FOR DASHBOARD",
-    category: "DEVELOPMENT",
-    place: "BARCELONA",
-    hasIcon: true
-  },
-  {
-    title: "STARTING CAMPAIGN",
-    category: "MARKETING STRATEGY",
-    place: "MADRID",
-    hasIcon: false
-  }
-];
+type ServiceItem = {
+  title: string;
+  category: string;
+  description?: string | null;
+};
 
-const sidebarItems = [
-  { label: "MADRID", count: null },
-  { label: "BARCELONA", count: null },
-  { label: "TOKYO", count: null },
-  { label: "LOS ANGELES", count: null },
-  { label: "PARIS", count: "05" },
-  { label: "NEW YORK CITY", count: null },
-  { label: "MUMBAI", count: null },
-  { label: "ISTANBUL", count: null }
+const serviceItems: ServiceItem[] = [
+  // 1. Career Documents & Personal Branding
+  { title: 'Expert CV & Resume Writing', category: 'Career Documents & Personal Branding', description: 'Role‑specific, metrics‑driven resumes that highlight impact and align with job requirements. Fully ATS‑optimized with the right keywords and clean structure.' },
+  { title: 'Cover Letter Mastery', category: 'Career Documents & Personal Branding', description: 'Compelling, tailored letters using problem‑solution‑outcome framing. Reusable templates plus guidance to adapt quickly per application.' },
+  { title: 'Free CV / ATS-Friendly Templates', category: 'Career Documents & Personal Branding', description: 'Recruiter‑tested, clean templates that parse reliably in ATS and emphasize clarity, readability, and global standards.' },
+  { title: 'LinkedIn Profile Optimization', category: 'Career Documents & Personal Branding', description: 'Keyword‑rich headline and About, achievement‑focused experience, and featured work to increase recruiter visibility and profile conversions.' },
+  { title: 'Website & Portfolio Building', category: 'Career Documents & Personal Branding', description: 'Modern, fast portfolio sites that showcase case studies, outcomes, and toolkits—built for credibility and easy sharing.' },
+  // 2. Global Application Guidance
+  { title: 'International CV Formatting Guidance', category: 'Global Application Guidance', description: 'Country‑specific norms (length, photo, sections, tone) with examples—so your CV fits the market you’re applying to.' },
+  { title: 'Job Application Guidance', category: 'Global Application Guidance', description: 'End‑to‑end strategy—JD analysis, tailoring, STAR responses, tracking, and smart follow‑ups to boost response rates.' },
+  // 3. Learning & Career Growth
+  { title: 'eLearning Resources & Certifications', category: 'Learning & Career Growth', description: 'Curated courses and certs mapped to your target role, with focused study paths and hands‑on practice.' },
+  { title: 'Explore Diverse Tech Roles', category: 'Learning & Career Growth', description: 'Clear role maps, skills matrices, and entry paths across BA, PM, QA, Data, and UX—so you pick and plan with confidence.' },
+  // 4. Community & Support
+  { title: 'Community Support & Networking', category: 'Community & Support', description: 'Access to peer support, events, and accountability channels—plus mock sessions and feedback to stay consistent.' },
 ];
 
 export default function ServicesPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleOpen = (index: number, hasDescription: boolean) => {
+    if (!hasDescription) return;
+    setOpenIndex(prev => (prev === index ? null : index));
+  };
+
   return (
-    <PageFrame variant="light" rootClassName="bg-[var(--kds-bg-base-light)]" mainClassName="grid lg:grid-cols-[1fr_300px] min-h-screen">
-        {/* Main Content */}
-        <div className="bg-[var(--kds-bg-base-light)] px-4 md:px-8 lg:px-16 py-16">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-body-sm text-[var(--kds-text-muted-on-light)] mb-12">
-            <span>HOME PAGE</span>
-            <span>|</span>
-            <span>ARCHIVE PORTFOLIO</span>
-            <span>|</span>
-            <span>2023</span>
-          </div>
-          
-          {/* Header */}
-          <div className="mb-16">
-            <h1 className="text-[120px] md:text-[140px] lg:text-[160px] font-bold leading-none text-[var(--kds-text-on-light)] mb-8">
-              SERVICE
-            </h1>
-          </div>
-          
-          {/* Services Table */}
-          <div className="space-y-0">
+    <PageFrame
+      variant="light"
+      rootClassName="bg-[var(--kds-bg-base-light)]"
+      mainClassName="min-h-screen"
+    >
+      {/* Main Content */}
+      <div className="bg-[var(--kds-bg-base-light)] px-4 md:px-8 lg:px-16 py-16">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-body-sm text-[var(--kds-text-muted-on-light)] mb-12">
+          <span>HOME PAGE</span>
+          <span>|</span>
+          <span>SERVICES</span>
+        </div>
+
+        {/* Header */}
+        <div className="mb-16">
+          <h1
+            className="font-extrabold tracking-tight text-[var(--kds-text-on-light)] leading-[0.9] mb-8"
+            style={{ fontSize: 'clamp(48px,8.5vw,112px)' }}
+          >
+            SERVICE
+          </h1>
+        </div>
+
+        {/* Services - responsive */}
+        <div className="space-y-0">
+          {/* Table view (md and up) */}
+          <div className="hidden md:block">
             {/* Table Header */}
-            <div className="grid grid-cols-[38%_24%_24%_14%] py-4 border-b border-[var(--kds-border-subtle-on-light)] text-overline text-[var(--kds-text-muted-on-light)]">
-              <div>TITLE POSITION</div>
+            <div className="grid grid-cols-[70%_30%] py-4 border-b border-[var(--kds-border-subtle-on-light)] text-overline text-[var(--kds-text-muted-on-light)]">
+              <div>TITLE</div>
               <div>CATEGORIES</div>
-              <div>PLACE</div>
-              <div></div>
             </div>
-            
             {/* Table Rows */}
-            {serviceItems.map((item, index) => (
-              <div key={index} className="grid grid-cols-[38%_24%_24%_14%] py-6 border-b border-[var(--kds-border-subtle-on-light)] items-center group hover:bg-[var(--kds-color-gray-50)] transition-colors">
-                <div>
-                  <h3 className="text-h4 text-[var(--kds-text-on-light)] mb-1 group-hover:text-[var(--kds-brand-primary)] transition-colors">
-                    {item.title}
-                  </h3>
-                  {item.title === "NEW FEATURES FOR DASHBOARD" && (
-                    <p className="text-body-sm text-[var(--kds-text-muted-on-light)]">
-                      CREATING NEW MAIN MODULES WITH UPDATING THE SYSTEM TO THE LATEST VERSION ALONG WITH A PROMOTIONAL CAMPAIGN IN SOCIAL MEDIA — CREATING A VISION AND IMPLEMENTING NEW STANDARDS FOR SYSTEM DESIGN.
+            {serviceItems.map((item, index) => {
+              const isOpen = openIndex === index;
+              const hasDescription = Boolean(item.description && item.description.trim().length > 0);
+              return (
+                <div key={index} className="border-b border-[var(--kds-border-subtle-on-light)]">
+                  <button
+                    className="w-full grid grid-cols-[70%_30%] py-6 items-start text-left group hover:bg-[var(--kds-color-gray-50)] transition-colors"
+                    aria-expanded={isOpen}
+                    onClick={() => toggleOpen(index, hasDescription)}
+                  >
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <h3 className="text-h4 text-[var(--kds-text-on-light)] group-hover:text-[var(--kds-brand-primary)] transition-colors">
+                          {item.title}
+                        </h3>
+                        {hasDescription && (
+                          <span className="text-body-sm text-[var(--kds-text-muted-on-light)]">{isOpen ? '−' : '+'}</span>
+                        )}
+                      </div>
+                      {hasDescription && isOpen && (
+                        <p className="mt-2 text-body-sm text-[var(--kds-text-muted-on-light)]">
+                          {item.description}
+                        </p>
+                      )}
+                    </div>
+                    <div className="text-body-sm text-[var(--kds-text-muted-on-light)] pt-1">
+                      {item.category}
+                    </div>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Tile view (small screens) */}
+          <div className="md:hidden grid grid-cols-1 gap-4">
+            {serviceItems.map((item, index) => {
+              const isOpen = openIndex === index;
+              const hasDescription = Boolean(item.description && item.description.trim().length > 0);
+              return (
+                <button
+                  key={index}
+                  className="w-full text-left rounded-[var(--kds-radius-xl)] border border-[var(--kds-border-subtle-on-light)] p-4 hover:bg-[var(--kds-color-gray-50)] transition-colors"
+                  aria-expanded={isOpen}
+                  onClick={() => toggleOpen(index, hasDescription)}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-h4 text-[var(--kds-text-on-light)]">
+                      {item.title}
+                    </h3>
+                    {hasDescription && (
+                      <span className="text-body-sm text-[var(--kds-text-muted-on-light)]">{isOpen ? '−' : '+'}</span>
+                    )}
+                  </div>
+                  <div className="mt-1 text-body-sm text-[var(--kds-text-muted-on-light)]">
+                    {item.category}
+                  </div>
+                  {hasDescription && isOpen && (
+                    <p className="mt-2 text-body-sm text-[var(--kds-text-muted-on-light)]">
+                      {item.description}
                     </p>
                   )}
-                </div>
-                <div className="text-body-sm text-[var(--kds-text-muted-on-light)]">
-                  {item.category}
-                </div>
-                <div className="text-body-sm text-[var(--kds-text-muted-on-light)]">
-                  {item.place}
-                </div>
-                <div className="flex justify-end">
-                  {item.hasIcon && (
-                    <div className="w-5 h-5 text-[var(--kds-text-muted-on-light)]">
-                      ↗
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+                </button>
+              );
+            })}
           </div>
-          
-          {/* Large Image Section */}
-          <div className="mt-16">
-            <div className="aspect-[16/9] bg-gradient-to-br from-gray-400 to-gray-600 rounded-lg overflow-hidden">
-              {/* Placeholder for the dramatic landscape image */}
-              <div className="w-full h-full bg-gradient-to-br from-gray-700 via-gray-800 to-black flex items-center justify-center">
-                <div className="text-white/20 text-6xl">🏔️</div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Bottom Text */}
-          <div className="mt-12 grid md:grid-cols-2 gap-12">
+        </div>
+      </div>
+
+      {/* Footer (reused from Home) */}
+      <section className="py-16 md:py-24 border-t border-[var(--kds-border-subtle-on-dark)] bg-[var(--kds-bg-base-dark)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Newsletter */}
             <div>
-              <p className="text-body-md text-[var(--kds-text-on-light)] leading-relaxed">
-                CREATING NEW SOLUTIONS AND IMPLEMENTING SYSTEMS IN ONLINE BUSINESSES. TRANSFORMING IDEAS INTO A REAL PRODUCT TAILORED TO YOUR NEEDS AND GOALS. CHECK OUT THE NEW HIGHER LEVEL.
-              </p>
+              <h3 className="text-h3 text-[var(--kds-text-on-dark)]">Sign up for updates</h3>
+              <p className="mt-2 text-body-md text-[var(--kds-text-muted-on-dark)]">Get new articles, templates, and product drops straight to your inbox.</p>
+              <form className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl">
+                <input
+                  type="email"
+                  required
+                  placeholder="you@company.com"
+                  className="flex-1 h-12 rounded-full px-5 bg-[rgba(255,255,255,0.06)] text-[var(--kds-text-on-dark)] placeholder:text-[rgba(255,255,255,0.55)] border border-[var(--kds-border-subtle-on-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--kds-focus-ring-color)]"
+                />
+                <Button type="submit" variant="primary" size="lg">Subscribe</Button>
+              </form>
+              <p className="mt-2 text-body-sm text-[var(--kds-text-muted-on-dark)]">No spam. Unsubscribe anytime.</p>
             </div>
-            <div className="space-y-8">
-              <div>
-                <h4 className="text-h4 text-[var(--kds-text-on-light)] mb-2">ABOUT US</h4>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-light)]">ABOUT COMPANY</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-light)]">MISSION AND VALUES</p>
+
+            {/* Footer links */}
+            <div className="lg:justify-self-end">
+              <div className="flex flex-wrap gap-4 text-body-md">
+                <Link href="/about" className="text-[var(--kds-text-muted-on-dark)] hover:text-[var(--kds-text-on-dark)]">About</Link>
+                <Link href="/services" className="text-[var(--kds-text-muted-on-dark)] hover:text-[var(--kds-text-on-dark)]">Services</Link>
+                <Link href="/contact" className="text-[var(--kds-text-muted-on-dark)] hover:text-[var(--kds-text-on-dark)]">Contact</Link>
+                <Link href="#products" className="text-[var(--kds-text-muted-on-dark)] hover:text-[var(--kds-text-on-dark)]">Products</Link>
               </div>
-              <div>
-                <h4 className="text-h4 text-[var(--kds-text-on-light)] mb-2">PRODUCTS</h4>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-light)]">OVERVIEW</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-light)]">SERVICES OVERVIEW</p>
-              </div>
+              <div className="mt-6 text-body-sm text-[var(--kds-text-muted-on-dark)]">© {new Date().getFullYear()} Elizabeth Umoren. All rights reserved.</div>
             </div>
           </div>
         </div>
-
-        {/* Right Sidebar */}
-        <aside className="bg-[var(--kds-bg-base-dark)] text-[var(--kds-text-on-dark)] p-8">
-          {/* Sidebar Header */}
-          <div className="mb-12">
-            <div className="text-overline text-[var(--kds-text-muted-on-dark)] mb-8">PLACE</div>
-          </div>
-          
-          {/* Location List */}
-          <div className="space-y-6">
-            {sidebarItems.map((item, index) => (
-              <div key={index} className="flex justify-between items-center py-2 border-b border-[var(--kds-border-subtle-on-dark)]">
-                <span className="text-body-sm text-[var(--kds-text-on-dark)]">
-                  {item.label}
-                </span>
-                {item.count && (
-                  <span className="text-body-sm text-[var(--kds-text-muted-on-dark)]">
-                    {item.count}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-          
-          {/* Bottom Section */}
-          <div className="mt-16 pt-8 border-t border-[var(--kds-border-subtle-on-dark)]">
-            <div className="space-y-4">
-              <div>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">PRODUCTS</p>
-              </div>
-              <div>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">OVERVIEW</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">SERVICES OVERVIEW</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">DASHBOARD</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">SOLUTION</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">CHANGELOG</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">PRICING</p>
-                <p className="text-body-sm text-[var(--kds-text-muted-on-dark)]">CASE STUDIES</p>
-              </div>
-            </div>
-            
-            <div className="mt-12 pt-8 border-t border-[var(--kds-border-subtle-on-dark)]">
-              <div className="flex justify-between text-body-sm">
-                <span className="text-[var(--kds-text-muted-on-dark)]">SYSTEM DASHBOARD</span>
-                <span className="text-[var(--kds-text-muted-on-dark)]">MOBILE VERSION</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </PageFrame>
+      </section>
+    </PageFrame>
   );
 }
